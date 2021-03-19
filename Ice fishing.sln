@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Ice fishing", "Ice fishing\Ice fishing.pyproj", "{277A7A70-4CF9-4E01-9944-A31E0BB0A9BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1920C26F-56FC-4149-8E3B-C0D09A9C16E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{277A7A70-4CF9-4E01-9944-A31E0BB0A9BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{277A7A70-4CF9-4E01-9944-A31E0BB0A9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B4C217F-20C3-4CA3-A022-9F41362109CC}
+	EndGlobalSection
+EndGlobal
