@@ -74,14 +74,17 @@ class fisherman():
 		pygame.draw.polygon(screen, (150,40,40), ((self.xpos,self.ypos), (self.xpos,self.ypos+30),(self.xpos-15,self.ypos)))
 		pygame.draw.polygon(screen, (150,40,40), ((self.xpos+70,self.ypos), (self.xpos+70,self.ypos+30),(self.xpos+85,self.ypos)))
 	def movement(self):
+		keypressed = False
 		self.xpos += self.xVel
 
 		keys = pygame.key.get_pressed()
 		if keys[pygame.K_a]:
 			self.xVel = -2
+			keypressed = True
 		if keys[pygame.K_d]:
 			self.xVel = 2
-		#if keys is not [pygame.K_a] and keys is not [pygame.K_d]:
-		#	self.xVel *= 0.1
+			keypressed = True
+		if keypressed == False:
+			self.xVel = 0
 		
 		
