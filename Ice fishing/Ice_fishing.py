@@ -34,7 +34,7 @@ while not doExit: # GAME LOOOOOOOOOOOOOOOOOOP
 
 	#RENDERRRRRRRRRRRRRRRRRRRRRRRRRRRRR
 	screen.fill((0,0,255))
-	pygame.draw.rect(screen, (0x89,0xe9,0xf0), (0,0,800,80))
+	pygame.draw.rect(screen, (0x89,0xe9,0xf6), (0,0,800,80))
 	for i in range(len(fishbucket)):
 		fishbucket[i].draw()
 	boat.draw()
