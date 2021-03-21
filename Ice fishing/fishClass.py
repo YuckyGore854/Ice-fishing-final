@@ -4,58 +4,84 @@ import random
 
 screen = pygame.display.set_mode((800, 600))
 class fish():
-    """contains fish and their associated variables"""
-    def __init__(self):
-        self.xpos = random.randrange(0, 500)
-        self.ypos = random.randrange(0, 500)
-        self.xVel = 0
-        self.yVel = 0
-        self.color = [
-            random.randrange(0, 100),
-            random.randrange(100, 255),
-            random.randrange(50, 200)
-        ]  # generates random color
-        self.isDead = False
-        self.onHook = False
-        self.direction = 1  #0 = left # 1 = right
-        self.ticker = random.randrange(0,100)
+	"""contains fish and their associated variables"""
+	def __init__(self):
+		self.xpos = random.randrange(80, 800 - 30)
+		self.ypos = random.randrange(80, 800)
+		self.xVel = random.randrange(-4,3)
+		self.yVel = random.randrange(-4,3)
+		self.color = [
+			random.randrange(0, 100),
+			random.randrange(100, 255),
+			random.randrange(50, 200)
+		]  # generates random color
+		self.isDead = False
+		self.onHook = False
+		self.direction = 1
+		self.ticker = random.randrange(0,100)
 
-    def movement(self):  # generates random numbers between -3 and 3
-        self.xVel = random.randrange(-3, 4)
-        self.xpos += self.xVel
+	def movement(self):  
+		self.ticker+=1
+		if self.ticker > 200:
+			self.xVel = random.randrange(-3,2)
+			self.yVel = random.randrange(-3,2)
+			self.ticker = 0
 
-        self.yVel = random.randrange(-3, 4)
-        self.ypos += self.yVel
-        if self.xVel > 0:
-            self.direction = 0
-        else:
-            self.direction = 1
+		self.xpos += self.xVel
 
-    def printinfo(self):
-        #print("Current xpos: ", self.xpos)
-        #print("Current ypos: ", self.ypos)
-        #print("Current x velocity :", self.xVel)
-        #print("Current y velocity :", self.yVel)
-        #print("Current color is: ", end='')
-        #for i in range(0, 3):
-        #    print(self.color[i], " ", end='')
+		self.ypos += self.yVel
+		if self.xVel < 0:
+			self.direction = 0
+		else:
+			self.direction = 1
 
-        pygame.draw.ellipse(screen, self.color, (self.xpos, self.ypos, 30, 20))
-        if self.direction == 0:
-            pygame.draw.circle(screen, (0, 0, 0),
-                               (self.xpos + 5, self.ypos + 5), 3)
-            pygame.draw.polygon(screen, self.color,
-                                ((self.xpos + 25, self.ypos + 10),
-                                 (self.xpos + 30, self.ypos),
-                                 (self.xpos + 30, self.ypos + 20)))
-        elif self.direction == 1:
-            pygame.draw.circle(screen, (0, 0, 0),
-                               (self.xpos + 25, self.ypos + 5), 3)
-            pygame.draw.polygon(screen, self.color,
-                                ((self.xpos, self.ypos),
-                                 (self.xpos, self.ypos + 20),
-                                 (self.xpos + 5, self.ypos + 5)))
-    def distance(self,foodx,foody):
-        dist = math.sqrt((foodx-self.xpos)*(foodx-self.xpos)+(foody-self.ypos)*(foody-self.ypos))
-        print(dist)
+	def draw(self):
 
+		pygame.draw.ellipse(screen, self.color, (self.xpos, self.ypos, 30, 20))
+		if self.direction == 0:
+			pygame.draw.circle(screen, (0, 0, 0),
+							   (self.xpos + 5, self.ypos + 5), 3)
+			pygame.draw.polygon(screen, self.color,
+								((self.xpos + 25, self.ypos + 10),
+								 (self.xpos + 30, self.ypos),
+								 (self.xpos + 30, self.ypos + 20)))
+		elif self.direction == 1:
+			pygame.draw.circle(screen, (0, 0, 0),
+							   (self.xpos + 25, self.ypos + 5), 3)
+			pygame.draw.polygon(screen, self.color,
+								((self.xpos, self.ypos),
+								 (self.xpos, self.ypos + 20),
+								 (self.xpos + 5, self.ypos + 5)))
+	def distance(self,foodx,foody):
+		dist = math.sqrt((foodx-self.xpos)*(foodx-self.xpos)+(foody-self.ypos)*(foody-self.ypos))
+		print(dist)
+
+	def collision(self):
+		if self.xpos > 800 - 30 or self.xpos < 0:
+			self.xVel *= -1
+		if self.ypos < 80 or self.ypos > 600:
+			self.yVel *= -1
+			self.yPos = 90
+
+class fisherman():
+	def __init__(self):
+		self.xpos = 50
+		self.ypos = 50
+		self.xVel = 0
+		self.stringLength = 20
+	def draw(self):
+		pygame.draw.rect(screen, (150,40,40), (self.xpos,self.ypos,70,30))
+		pygame.draw.polygon(screen, (150,40,40), ((self.xpos,self.ypos), (self.xpos,self.ypos+30),(self.xpos-15,self.ypos)))
+		pygame.draw.polygon(screen, (150,40,40), ((self.xpos+70,self.ypos), (self.xpos+70,self.ypos+30),(self.xpos+85,self.ypos)))
+	def movement(self):
+		self.xpos += self.xVel
+
+		keys = pygame.key.get_pressed()
+		if keys[pygame.K_a]:
+			self.xVel = -2
+		if keys[pygame.K_d]:
+			self.xVel = 2
+		#if keys is not [pygame.K_a] and keys is not [pygame.K_d]:
+		#	self.xVel *= 0.1
+		
+		
